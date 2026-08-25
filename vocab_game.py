@@ -105,11 +105,11 @@ st.session_state.ans2_val = ans2
 
 # ✏️ [พื้นที่สำหรับนักเรียน]: เพิ่มข้อ 3, 4 ตรงนี้
 ans3 = st.text_input(
-    "ข้อ 3: The force that pulls objects toward the center of the Earth is `g r a v i t _`. 🌌",
+    "ข้อ 3: The force that pulls objects toward the center of the Earth is `g _ _ _ _ t _`. 🌌",
     value=st.session_state.ans3_val,
 )
 ans4 = st.text_input(
-    "ข้อ 4: A system of millions or billions of stars is called a `g a l a _ y`. 🪐",
+    "ข้อ 4: A system of millions or billions of stars is called a `g _ _ _ _ y`. 🪐",
     value=st.session_state.ans4_val,
 )
 st.session_state.ans3_val = ans3
