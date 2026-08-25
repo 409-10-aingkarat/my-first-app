@@ -77,6 +77,9 @@ def show_result_dialog(ans1, ans2, ans3, ans4):
 # ----------------------------------------------------
 st.button("🎮 เริ่มเล่นเกม", on_click=reset_game)
 
+# เช็กว่าได้กดเริ่มเกมแล้วหรือยัง (ถ้านับเวลาอยู่ ให้แสดงช่องคำถามและปุ่มส่ง)
+if "start" in st.session_state and not st.session_state.get("is_ended", False):
+
 # 2. แถบแสดงเวลานับถอยหลัง
 if "start" in st.session_state and not st.session_state.get("is_ended", False):
     time_left = int(30 - (time.time() - st.session_state.start))
