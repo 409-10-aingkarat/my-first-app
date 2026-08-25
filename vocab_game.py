@@ -8,7 +8,6 @@ if "ans1_val" not in st.session_state:
     st.session_state.ans1_val = ""
 if "ans2_val" not in st.session_state:
     st.session_state.ans2_val = ""
-# 📌 เพิ่มข้อ 3 และ 4 ตรงนี้
 if "ans3_val" not in st.session_state:
     st.session_state.ans3_val = ""
 if "ans4_val" not in st.session_state:
@@ -23,6 +22,7 @@ def reset_game():
     st.session_state.ans4_val = ""  # เคลียร์ค่าช่องข้อ 4
     st.session_state.start = time.time()  # เริ่มเวลาใหม่
     st.session_state.is_ended = False  # ปิด Dialog
+
 
 # ----------------------------------------------------
 # 📌 ฟังก์ชัน MessageBox (Dialog)
@@ -71,7 +71,8 @@ def show_result_dialog(ans1, ans2, ans3, ans4):
         st.success("🎉 You win!")
     else:
         st.error("💀 You lose!")
-        
+
+
 # ----------------------------------------------------
 # 1. ปุ่มเริ่มเล่นเกม
 # ----------------------------------------------------
@@ -79,47 +80,43 @@ st.button("🎮 เริ่มเล่นเกม", on_click=reset_game)
 
 # เช็กว่าได้กดเริ่มเกมแล้วหรือยัง (ถ้านับเวลาอยู่ ให้แสดงช่องคำถามและปุ่มส่ง)
 if "start" in st.session_state and not st.session_state.get("is_ended", False):
-
-# 2. แถบแสดงเวลานับถอยหลัง
-if "start" in st.session_state and not st.session_state.get("is_ended", False):
+    # 2. แถบแสดงเวลานับถอยหลัง
     time_left = int(30 - (time.time() - st.session_state.start))
-
     if time_left > 0:
         st.error(f"⏳ เหลือเวลา: {time_left} วินาที")
     else:
         st.session_state.is_ended = True
         st.rerun()
 
-st.divider()
+    st.divider()
 
-# 3. ช่องรับคำตอบ (ใช้ value ผูกกับตัวแปรตรงๆ เพื่อสั่งเคลียร์ได้)
-ans1 = st.text_input(
-    "ข้อ 1: An `a _ _ l e` a day keeps the doctor away. 🍎",
-    value=st.session_state.ans1_val,
-)
-ans2 = st.text_input(
-    "ข้อ 2: Cats love to eat `f _ s h`. 🐟",
-    value=st.session_state.ans2_val,
-)
+    # 3. ช่องรับคำตอบ
+    ans1 = st.text_input(
+        "ข้อ 1: An `a _ _ l e` a day keeps the doctor away. 🍎",
+        value=st.session_state.ans1_val,
+    )
+    ans2 = st.text_input(
+        "ข้อ 2: Cats love to eat `f _ s h`. 🐟",
+        value=st.session_state.ans2_val,
+    )
 
-# อัปเดตค่าล่าสุดเข้าตัวแปร
-st.session_state.ans1_val = ans1
-st.session_state.ans2_val = ans2
+    # อัปเดตค่าล่าสุดเข้าตัวแปร
+    st.session_state.ans1_val = ans1
+    st.session_state.ans2_val = ans2
 
-# ✏️ [พื้นที่สำหรับนักเรียน]: เพิ่มข้อ 3, 4 ตรงนี้
-ans3 = st.text_input(
-    "ข้อ 3: The force that pulls objects toward the center of the Earth is `g _ _ _ _ t _`. 🌌",
-    value=st.session_state.ans3_val,
-)
-ans4 = st.text_input(
-    "ข้อ 4: A system of millions or billions of stars is called a `g _ _ _ _ y`. 🪐",
-    value=st.session_state.ans4_val,
-)
-st.session_state.ans3_val = ans3
-st.session_state.ans4_val = ans4
+    # ✏️ [พื้นที่สำหรับนักเรียน]: เพิ่มข้อ 3, 4 ตรงนี้
+    ans3 = st.text_input(
+        "ข้อ 3: The force that pulls objects toward the center of the Earth is `g _ _ _ _ t _`. 🌌",
+        value=st.session_state.ans3_val,
+    )
+    ans4 = st.text_input(
+        "ข้อ 4: A system of millions or billions of stars is called a `g _ _ _ _ y`. 🪐",
+        value=st.session_state.ans4_val,
+    )
+    st.session_state.ans3_val = ans3
+    st.session_state.ans4_val = ans4
 
-# 4. ปุ่มส่งคำตอบ
-if "start" in st.session_state and not st.session_state.get("is_ended", False):
+    # 4. ปุ่มส่งคำตอบ
     if st.button("📥 ส่งคำตอบ"):
         st.session_state.is_ended = True
         st.rerun()
@@ -127,9 +124,14 @@ if "start" in st.session_state and not st.session_state.get("is_ended", False):
     time.sleep(1)
     st.rerun()
 
-# 5. แสดง Dialog ผลลัพธ์
+# 5. แสดง Dialog ผลลัพธ์ (ดึงค่าจาก session_state ป้องกันตัวแปรหาไม่เจอ)
 if st.session_state.get("is_ended", False):
-    show_result_dialog(ans1, ans2, ans3, ans4)
+    show_result_dialog(
+        st.session_state.ans1_val,
+        st.session_state.ans2_val,
+        st.session_state.ans3_val,
+        st.session_state.ans4_val,
+    )
 
 st.divider()
 st.write("นายอิงครัต แสนบัวผัน เลขที่ 10 ม.4/9")
