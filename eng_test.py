@@ -1,9 +1,10 @@
 import streamlit as st
 
 st.title("🎮 English Grammar Challenge")
-st.write("ทดลอง 30 ข้อ")
+st.write("ระดับชั้น ม.4 | 30 ข้อ")
 
-questioquestions  {
+questions = [
+    {
         "question": "Look at those dark clouds! It ___ rain.",
         "options": [
             "will",
@@ -197,4 +198,147 @@ questioquestions  {
         "question": "Which sentence is Zero Conditional?",
         "options": [
             "If I study, I will pass.",
-            "If
+            "If I were rich, I would travel.",
+            "If you mix blue and yellow, you get green.",
+            "If I had studied, I would have passed."
+        ],
+        "answer": "If you mix blue and yellow, you get green."
+    },
+    {
+        "question": "Which sentence is First Conditional?",
+        "options": [
+            "If I were you, I would leave.",
+            "If it rains, I will stay home.",
+            "If you heat ice, it melts.",
+            "If I had known, I would have helped."
+        ],
+        "answer": "If it rains, I will stay home."
+    },
+    {
+        "question": "Which sentence is Second Conditional?",
+        "options": [
+            "If I study, I will pass.",
+            "If I were rich, I would travel.",
+            "If water freezes, it becomes ice.",
+            "If I had studied, I would have passed."
+        ],
+        "answer": "If I were rich, I would travel."
+    },
+    {
+        "question": "Which sentence is Third Conditional?",
+        "options": [
+            "If I study, I will pass.",
+            "If I were rich, I would travel.",
+            "If I had studied, I would have passed.",
+            "If I study every day, I get better."
+        ],
+        "answer": "If I had studied, I would have passed."
+    },
+    {
+        "question": "Which sentence shows a planned future arrangement?",
+        "options": [
+            "I will visit him.",
+            "I am visiting him tomorrow.",
+            "I visited him yesterday.",
+            "I had visited him."
+        ],
+        "answer": "I am visiting him tomorrow."
+    },
+    {
+        "question": "Which sentence refers to a timetable?",
+        "options": [
+            "The train leaves at 7 p.m.",
+            "The train will leave at 7 p.m.",
+            "The train is going to leave.",
+            "The train left at 7 p.m."
+        ],
+        "answer": "The train leaves at 7 p.m."
+    },
+    {
+        "question": "Which sentence expresses a spontaneous decision?",
+        "options": [
+            "I am going to help you.",
+            "I will help you.",
+            "I am helping you tomorrow.",
+            "I helped you."
+        ],
+        "answer": "I will help you."
+    },
+    {
+        "question": "I ___ my homework before my friends arrived.",
+        "options": [
+            "finished",
+            "had finished",
+            "finish",
+            "will finish"
+        ],
+        "answer": "had finished"
+    },
+    {
+        "question": "If I ___ more careful, I wouldn't make so many mistakes.",
+        "options": [
+            "am",
+            "were",
+            "will be",
+            "had been"
+        ],
+        "answer": "were"
+    },
+    {
+        "question": "If they had practiced more, they ___ the competition.",
+        "options": [
+            "would win",
+            "will win",
+            "would have won",
+            "won"
+        ],
+        "answer": "would have won"
+    },
+    {
+        "question": "If you don't save your work, you ___ lose it.",
+        "options": [
+            "would",
+            "will",
+            "had",
+            "were"
+        ],
+        "answer": "will"
+    }
+]
+
+score = 0
+
+for i, q in enumerate(questions):
+    st.subheader(f"ข้อ {i + 1}")
+
+    answer = st.radio(
+        q["question"],
+        q["options"],
+        index=None,
+        key=f"question_{i}"
+    )
+
+    if answer is not None and answer == q["answer"]:
+        score += 1
+
+
+if st.button("ตรวจคำตอบ"):
+    unanswered = sum(
+        1 for i in range(len(questions))
+        if st.session_state.get(f"question_{i}") is None
+    )
+
+    if unanswered > 0:
+        st.warning(f"ยังไม่ได้ตอบ {unanswered} ข้อ")
+    else:
+        st.success(f"🎉 คะแนนของคุณ: {score}/30")
+
+        if score >= 27:
+            st.balloons()
+            st.write("🏆 ยอดเยี่ยมมาก!")
+        elif score >= 24:
+            st.write("🔥 ดีมาก!")
+        elif score >= 18:
+            st.write("👍 ผ่าน! แต่ยังทบทวนเพิ่มได้")
+        else:
+            st.write("📚 ลองทบทวน Grammar แล้วเล่นใหม่")
