@@ -1,9 +1,9 @@
 import streamlit as st
 
 # ตั้งค่าหน้าเว็บ Streamlit
-st.set_page_config(page_title="ข้อสอบความสัมพันธ์และฟังก์ชัน ม.4 (Gifted)", layout="wide")
+st.set_page_config(page_title="ข้อสอบความสัมพันธ์และฟังก์ชัน ", layout="wide")
 
-st.title("📝 ข้อสอบความสัมพันธ์และฟังก์ชัน ระดับ ม.4 (Gifted)")
+st.title("📝 ข้อสอบความสัมพันธ์และฟังก์ชัน ")
 st.caption("แบบทดสอบจำนวน 20 ข้อ พร้อมระบบตรวจคำตอบอัตโนมัติ")
 
 # -------------------------------------------------------------
@@ -160,7 +160,7 @@ questions = [
 # -------------------------------------------------------------
 user_answers = {}
 
-st.subheader("📌 ส่วนที่ 1: ข้อสอบระดับปานกลาง (ข้อ 1 - 10)")
+st.subheader("📌 ส่วนที่ 1: (ข้อ 1 - 10)")
 for q in questions[:10]:
     st.markdown(f"**{q['question']}**")
     user_answers[q["id"]] = st.radio(
@@ -171,7 +171,7 @@ for q in questions[:10]:
     )
     st.divider()
 
-st.subheader("🔥 ส่วนที่ 2: ข้อสอบระดับวิเคราะห์ Gifted (ข้อ 11 - 20)")
+st.subheader("🔥 ส่วนที่ 2: (ข้อ 11 - 20)")
 for q in questions[10:]:
     st.markdown(f"**{q['question']}**")
     user_answers[q["id"]] = st.radio(
