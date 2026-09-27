@@ -1,327 +1,132 @@
 import streamlit as st
 
-st.title("🎮 English Grammar Challenge")
-st.write("ระดับชั้น ม.4 | 30 ข้อ")
+st.title("📚 Gold Experience Vocabulary Challenge")
+st.write("ม.4 | Unit 3 - 5 (20 ข้อ)")
 
 questions = [
+    # Unit 3: Technology & Media
     {
-        "question": "Look at those dark clouds! It ___ rain.",
-        "options": [
-            "will",
-            "is going to",
-            "is raining",
-            "rains"
-        ],
-        "answer": "is going to"
+        "question": "You need to ___ your photo to the website if you want to enter the contest.",
+        "options": ["download", "upload", "delete", "search"],
+        "answer": "upload"
     },
     {
-        "question": "I think people ___ live on Mars one day.",
-        "options": [
-            "are going to",
-            "will",
-            "are living",
-            "lived"
-        ],
-        "answer": "will"
+        "question": "I forgot to save my document, and now the computer screen is completely ___.",
+        "options": ["frozen", "online", "connected", "digital"],
+        "answer": "frozen"
     },
     {
-        "question": "We ___ our teacher at 9 a.m. tomorrow.",
-        "options": [
-            "meet",
-            "met",
-            "are meeting",
-            "will meeting"
-        ],
-        "answer": "are meeting"
+        "question": "Don't forget to ___ out of your social media account when using a public computer.",
+        "options": ["log", "turn", "click", "switch"],
+        "answer": "log"
     },
     {
-        "question": "The English class ___ at 8:30 tomorrow morning.",
-        "options": [
-            "starts",
-            "is starting",
-            "started",
-            "will started"
-        ],
-        "answer": "starts"
+        "question": "You can ___ on this link to visit the school's official page.",
+        "options": ["press", "click", "type", "swipe"],
+        "answer": "click"
     },
     {
-        "question": "She ___ to Bangkok last weekend.",
-        "options": [
-            "goes",
-            "has gone",
-            "went",
-            "had gone"
-        ],
-        "answer": "went"
+        "question": "My phone battery is low, so I need to find a ___.",
+        "options": ["charger", "keyboard", "screen", "headphone"],
+        "answer": "charger"
     },
     {
-        "question": "When I arrived, the movie ___.",
-        "options": [
-            "already started",
-            "had already started",
-            "has already started",
-            "will start"
-        ],
-        "answer": "had already started"
+        "question": "Scientists hope to ___ new technology to help clean the oceans.",
+        "options": ["invent", "discover", "explore", "connect"],
+        "answer": "invent"
     },
     {
-        "question": "By the time we got there, they ___ dinner.",
-        "options": [
-            "finished",
-            "had finished",
-            "finish",
-            "will finish"
-        ],
-        "answer": "had finished"
+        "question": "Make sure you install antivirus software to ___ your computer from viruses.",
+        "options": ["protect", "damage", "repair", "replace"],
+        "answer": "protect"
+    },
+
+    # Unit 4: Environment & Natural World
+    {
+        "question": "Global warming is causing temperatures around the world to ___.",
+        "options": ["drop", "increase", "fall", "disappear"],
+        "answer": "increase"
     },
     {
-        "question": "If you heat water to 100°C, it ___.",
-        "options": [
-            "will boil",
-            "would boil",
-            "boils",
-            "boiled"
-        ],
-        "answer": "boils"
+        "question": "We should reduce plastic waste to protect wild animals in their natural ___.",
+        "options": ["habitat", "house", "society", "landscape"],
+        "answer": "habitat"
     },
     {
-        "question": "If I study harder, I ___ better grades.",
-        "options": [
-            "get",
-            "would get",
-            "will get",
-            "got"
-        ],
-        "answer": "will get"
+        "question": "It is important to ___ paper, glass, and plastic to help the environment.",
+        "options": ["reuse", "recycle", "throw", "pollute"],
+        "answer": "recycle"
     },
     {
-        "question": "If she practices every day, she ___ improve.",
-        "options": [
-            "would",
-            "will",
-            "had",
-            "was"
-        ],
-        "answer": "will"
+        "question": "Heavy rain caused a severe ___ that flooded many streets in the city.",
+        "options": ["drought", "flood", "earthquake", "storm"],
+        "answer": "flood"
     },
     {
-        "question": "If I ___ enough money, I would buy a new laptop.",
-        "options": [
-            "have",
-            "had",
-            "will have",
-            "had had"
-        ],
-        "answer": "had"
+        "question": "Many species of animals are in danger of becoming ___ if we don't protect them.",
+        "options": ["extinct", "alive", "safe", "common"],
+        "answer": "extinct"
     },
     {
-        "question": "If I were you, I ___ apologize to her.",
-        "options": [
-            "will",
-            "would",
-            "am",
-            "had"
-        ],
-        "answer": "would"
+        "question": "Air ___ is a serious problem in big cities with too many cars.",
+        "options": ["pollution", "protection", "climate", "nature"],
+        "answer": "pollution"
+    },
+
+    # Unit 5: Travel, Transport & Places
+    {
+        "question": "We arrived at the airport two hours early to ___ in our luggage.",
+        "options": ["check", "take", "board", "get"],
+        "answer": "check"
     },
     {
-        "question": "If he worked harder, he ___ the exam.",
-        "options": [
-            "will pass",
-            "would pass",
-            "passes",
-            "had passed"
-        ],
-        "answer": "would pass"
+        "question": "Please keep your seatbelt fastened until the plane has landed at the ___.",
+        "options": ["destination", "station", "stop", "platform"],
+        "answer": "destination"
     },
     {
-        "question": "If I had known about the test, I ___ harder.",
-        "options": [
-            "would study",
-            "will study",
-            "would have studied",
-            "study"
-        ],
-        "answer": "would have studied"
+        "question": "The train was delayed, so we had to wait on the ___ for an hour.",
+        "options": ["platform", "runway", "pavement", "gate"],
+        "answer": "platform"
     },
     {
-        "question": "If she had left earlier, she ___ the bus.",
-        "options": [
-            "would catch",
-            "will catch",
-            "would have caught",
-            "catches"
-        ],
-        "answer": "would have caught"
+        "question": "We stayed at a cozy ___ near the lake during our vacation.",
+        "options": ["campsite", "accommodation", "resort", "hotel"],
+        "answer": "accommodation"
     },
     {
-        "question": "If you don't hurry, you ___ late.",
-        "options": [
-            "are",
-            "were",
-            "will be",
-            "would be"
-        ],
-        "answer": "will be"
+        "question": "Before traveling abroad, you must check if your ___ is still valid.",
+        "options": ["ticket", "passport", "license", "card"],
+        "answer": "passport"
     },
     {
-        "question": "Unless you study, you ___ pass the exam.",
-        "options": [
-            "will",
-            "won't",
-            "would",
-            "had"
-        ],
-        "answer": "won't"
+        "question": "We booked a guided ___ to learn more about the history of the ancient ruins.",
+        "options": ["trip", "tour", "journey", "voyage"],
+        "answer": "tour"
     },
     {
-        "question": "Take an umbrella ___ it rains later.",
-        "options": [
-            "unless",
-            "in case",
-            "although",
-            "because"
-        ],
-        "answer": "in case"
-    },
-    {
-        "question": "I won't go outside ___ the rain stops.",
-        "options": [
-            "in case",
-            "unless",
-            "because",
-            "when"
-        ],
-        "answer": "unless"
-    },
-    {
-        "question": "Which sentence is Zero Conditional?",
-        "options": [
-            "If I study, I will pass.",
-            "If I were rich, I would travel.",
-            "If you mix blue and yellow, you get green.",
-            "If I had studied, I would have passed."
-        ],
-        "answer": "If you mix blue and yellow, you get green."
-    },
-    {
-        "question": "Which sentence is First Conditional?",
-        "options": [
-            "If I were you, I would leave.",
-            "If it rains, I will stay home.",
-            "If you heat ice, it melts.",
-            "If I had known, I would have helped."
-        ],
-        "answer": "If it rains, I will stay home."
-    },
-    {
-        "question": "Which sentence is Second Conditional?",
-        "options": [
-            "If I study, I will pass.",
-            "If I were rich, I would travel.",
-            "If water freezes, it becomes ice.",
-            "If I had studied, I would have passed."
-        ],
-        "answer": "If I were rich, I would travel."
-    },
-    {
-        "question": "Which sentence is Third Conditional?",
-        "options": [
-            "If I study, I will pass.",
-            "If I were rich, I would travel.",
-            "If I had studied, I would have passed.",
-            "If I study every day, I get better."
-        ],
-        "answer": "If I had studied, I would have passed."
-    },
-    {
-        "question": "Which sentence shows a planned future arrangement? (ประโยคใดแสดงถึงการวางแผนหรือการนัดหมายไว้ล่วงหน้าในอนาคต?)",
-        "options": [
-            "I will visit him.",
-            "I am visiting him tomorrow.",
-            "I visited him yesterday.",
-            "I had visited him."
-        ],
-        "answer": "I am visiting him tomorrow."
-    },
-    {
-        "question": "Which sentence refers to a timetable?",
-        "options": [
-            "The train leaves at 7 p.m.",
-            "The train will leave at 7 p.m.",
-            "The train is going to leave.",
-            "The train left at 7 p.m."
-        ],
-        "answer": "The train leaves at 7 p.m."
-    },
-    {
-        "question": "Which sentence expresses a spontaneous decision? (ประโยคใดแสดงถึงการตัดสินใจในขณะนั้น?)",
-        "options": [
-            "I am going to help you.",
-            "I will help you.",
-            "I am helping you tomorrow.",
-            "I helped you."
-        ],
-        "answer": "I will help you."
-    },
-    {
-        "question": "I ___ my homework before my friends arrived.",
-        "options": [
-            "finished",
-            "had finished",
-            "finish",
-            "will finish"
-        ],
-        "answer": "had finished"
-    },
-    {
-        "question": "If I ___ more careful, I wouldn't make so many mistakes.",
-        "options": [
-            "am",
-            "were",
-            "will be",
-            "had been"
-        ],
-        "answer": "were"
-    },
-    {
-        "question": "If they had practiced more, they ___ the competition. (ถ้าพวกเขาซ้อมกันมากกว่านี้ พวกเขาก็คงจะ ___ การแข่งขันไปแล้ว)",
-        "options": [
-            "would win",
-            "will win",
-            "would have won",
-            "won"
-        ],
-        "answer": "would have won"
-    },
-    {
-        "question": "If you don't save your work, you ___ lose it.",
-        "options": [
-            "would",
-            "will",
-            "had",
-            "were"
-        ],
-        "answer": "will"
+        "question": "It's usually cheaper to travel during the off-peak ___.",
+        "options": ["season", "time", "date", "holiday"],
+        "answer": "season"
     }
 ]
 
 # สร้างแบบฟอร์มตอบคำถาม
 user_answers = {}
-with st.form("quiz_form"):
+with st.form("vocab_quiz_form"):
     for idx, q in enumerate(questions, 1):
         st.subheader(f"ข้อที่ {idx}")
         user_answers[idx] = st.radio(
             q["question"], 
             q["options"], 
-            key=f"q_{idx}",
+            key=f"vocab_{idx}",
             index=None
         )
         st.write("---")
     
     submitted = st.form_submit_button("ตรวจคำตอบ")
 
-# ส่วนตรวจคำตอบและแสดงข้อที่ทำผิด
+# ส่วนตรวจคำตอบและแสดงผล
 if submitted:
     score = 0
     wrong_questions = []
@@ -341,15 +146,15 @@ if submitted:
     st.header("📊 สรุปผลคะแนน")
     st.success(f"คะแนนของคุณ: {score} / {len(questions)}")
 
-    if score >= 27:
+    if score >= 18:
         st.balloons()
-        st.write("🏆 ยอดเยี่ยมมาก!")
-    elif score >= 24:
-        st.write("🔥 ดีมาก!")
-    elif score >= 18:
-        st.write("👍 ผ่าน! แต่ยังทบทวนเพิ่มได้")
+        st.write("🏆 ยอดเยี่ยมมาก! คลังคำศัพท์แน่นสุดๆ")
+    elif score >= 15:
+        st.write("🔥 ดีมาก! ทำได้เกิน 75%")
+    elif score >= 10:
+        st.write("👍 ผ่านเกณฑ์! ทบทวนคำศัพท์เพิ่มอีกนิดจะดีมาก")
     else:
-        st.write("📚 ลองทบทวน Grammar แล้วเล่นใหม่")
+        st.write("📚 ลองกลับไปทบทวนคำศัพท์ใน Unit 3-5 แล้วลองใหม่นะ")
 
     st.write("---")
 
