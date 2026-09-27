@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import pandas as pd
 
 # ตั้งค่าหน้าเว็บ Streamlit
 st.set_page_config(page_title="ข้อสอบความสัมพันธ์และฟังก์ชัน ม.4 (Gifted)", layout="wide")
@@ -9,32 +9,23 @@ st.title("📝 ข้อสอบความสัมพันธ์และ�
 st.caption("แบบทดสอบจำนวน 20 ข้อ พร้อมระบบตรวจคำตอบอัตโนมัติ")
 
 # -------------------------------------------------------------
-# ฟังก์ชันสำหรับวาดกราฟโจทย์
+# ฟังก์ชันสำหรับวาดกราฟโจทย์ (ใช้ st.line_chart / st.area_chart ในตัว Streamlit)
 # -------------------------------------------------------------
 def plot_q4():
-    fig, ax = plt.subplots(figsize=(4, 4))
-    x = [4, 0, -4, 0, 4]
-    y = [0, 4, 0, -4, 0]
-    ax.plot(x, y, 'b-', linewidth=2)
-    ax.fill(x, y, 'skyblue', alpha=0.4)
-    ax.axhline(0, color='black', linewidth=1)
-    ax.axvline(0, color='black', linewidth=1)
-    ax.grid(True, linestyle='--', alpha=0.6)
-    ax.set_title("Graph for Question 4: |x| + |y| = 4")
-    ax.set_xlim(-6, 6)
-    ax.set_ylim(-6, 6)
-    return fig
+    st.write("**กราฟความสัมพันธ์ $|x| + |y| = 4$**")
+    # สร้างพิกัดรูปสี่เหลี่ยม
+    df = pd.DataFrame({
+        'x': [4, 0, -4, 0, 4],
+        'y': [0, 4, 0, -4, 0]
+    })
+    st.line_chart(df, x='x', y='y')
 
 def plot_q9():
-    fig, ax = plt.subplots(figsize=(5, 3))
-    x = np.linspace(-7, 5, 400)
+    st.write("**กราฟฟังก์ชัน $f(x) = |x - 2| + |x + 4|$**")
+    x = np.linspace(-7, 5, 100)
     y = np.abs(x - 2) + np.abs(x + 4)
-    ax.plot(x, y, 'r-', linewidth=2)
-    ax.axhline(0, color='black', linewidth=1)
-    ax.axvline(0, color='black', linewidth=1)
-    ax.grid(True, linestyle='--', alpha=0.6)
-    ax.set_title("Graph for Question 9: f(x) = |x - 2| + |x + 4|")
-    return fig
+    df = pd.DataFrame({'x': x, 'y': y})
+    st.line_chart(df, x='x', y='y')
 
 # -------------------------------------------------------------
 # คลังข้อสอบ 20 ข้อ
@@ -195,7 +186,7 @@ st.subheader("📌 ส่วนที่ 1: ข้อสอบระดับป
 for q in questions[:10]:
     st.markdown(f"**{q['question']}**")
     if "has_plot" in q:
-        st.pyplot(q["has_plot"]())
+        q["has_plot"]()
     user_answers[q["id"]] = st.radio(
         f"เลือกคำตอบสำหรับข้อ {q['id']}:", 
         q["options"], 
@@ -237,7 +228,7 @@ if st.button("ส่งคำตอบ 🚀", type="primary"):
         st.warning("💪 พยายามอีกนิด! ค่อยๆ สรุปแนวคิดทีละข้อครับ")
 
     st.markdown("---")
-    st.subheader("💡 เฉลยอย่างละเอียด")
+    st.subheader("💡 เฉลยอย่างรายละเอียด")
     for q in questions:
         user_ans = user_answers.get(q["id"])
         is_correct = user_ans == q["answer"]
