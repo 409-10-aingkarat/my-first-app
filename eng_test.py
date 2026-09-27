@@ -235,7 +235,7 @@ questions = [
         "answer": "If I had studied, I would have passed."
     },
     {
-        "question": "Which sentence shows a planned future arrangement?",
+        "question": "Which sentence shows a planned future arrangement? (ประโยคใดแสดงถึงการวางแผนหรือการนัดหมายไว้ล่วงหน้าในอนาคต?)",
         "options": [
             "I will visit him.",
             "I am visiting him tomorrow.",
@@ -255,7 +255,7 @@ questions = [
         "answer": "The train leaves at 7 p.m."
     },
     {
-        "question": "Which sentence expresses a spontaneous decision?",
+        "question": "Which sentence expresses a spontaneous decision? (ประโยคใดแสดงถึงการตัดสินใจในขณะนั้น?)",
         "options": [
             "I am going to help you.",
             "I will help you.",
@@ -285,7 +285,7 @@ questions = [
         "answer": "were"
     },
     {
-        "question": "If they had practiced more, they ___ the competition.",
+        "question": "If they had practiced more, they ___ the competition. (ถ้าพวกเขาซ้อมกันมากกว่านี้ พวกเขาก็คงจะ ___ การแข่งขันไปแล้ว)",
         "options": [
             "would win",
             "will win",
@@ -306,39 +306,60 @@ questions = [
     }
 ]
 
-score = 0
+# สร้างแบบฟอร์มตอบคำถาม
+user_answers = {}
+with st.form("quiz_form"):
+    for idx, q in enumerate(questions, 1):
+        st.subheader(f"ข้อที่ {idx}")
+        user_answers[idx] = st.radio(
+            q["question"], 
+            q["options"], 
+            key=f"q_{idx}",
+            index=None
+        )
+        st.write("---")
+    
+    submitted = st.form_submit_button("ตรวจคำตอบ")
 
-for i, q in enumerate(questions):
-    st.subheader(f"ข้อ {i + 1}")
+# ส่วนตรวจคำตอบและแสดงข้อที่ทำผิด
+if submitted:
+    score = 0
+    wrong_questions = []
 
-    answer = st.radio(
-        q["question"],
-        q["options"],
-        index=None,
-        key=f"question_{i}"
-    )
-
-    if answer is not None and answer == q["answer"]:
-        score += 1
-
-
-if st.button("ตรวจคำตอบ"):
-    unanswered = sum(
-        1 for i in range(len(questions))
-        if st.session_state.get(f"question_{i}") is None
-    )
-
-    if unanswered > 0:
-        st.warning(f"ยังไม่ได้ตอบ {unanswered} ข้อ")
-    else:
-        st.success(f"🎉 คะแนนของคุณ: {score}/30")
-
-        if score >= 27:
-            st.balloons()
-            st.write("🏆 ยอดเยี่ยมมาก!")
-        elif score >= 24:
-            st.write("🔥 ดีมาก!")
-        elif score >= 18:
-            st.write("👍 ผ่าน! แต่ยังทบทวนเพิ่มได้")
+    for idx, q in enumerate(questions, 1):
+        user_ans = user_answers.get(idx)
+        if user_ans == q["answer"]:
+            score += 1
         else:
-            st.write("📚 ลองทบทวน Grammar แล้วเล่นใหม่")
+            wrong_questions.append({
+                "no": idx,
+                "question": q["question"],
+                "user_ans": user_ans if user_ans else "ไม่ได้ตอบ",
+                "correct_ans": q["answer"]
+            })
+
+    st.header("📊 สรุปผลคะแนน")
+    st.success(f"คะแนนของคุณ: {score} / {len(questions)}")
+
+    if score >= 27:
+        st.balloons()
+        st.write("🏆 ยอดเยี่ยมมาก!")
+    elif score >= 24:
+        st.write("🔥 ดีมาก!")
+    elif score >= 18:
+        st.write("👍 ผ่าน! แต่ยังทบทวนเพิ่มได้")
+    else:
+        st.write("📚 ลองทบทวน Grammar แล้วเล่นใหม่")
+
+    st.write("---")
+
+    if wrong_questions:
+        st.subheader("❌ ข้อที่คุณตอบผิด / ยังไม่ได้ตอบ:")
+        for item in wrong_questions:
+            st.error(f"**ข้อที่ {item['no']}:** {item['question']}")
+            st.write(f"- **คำตอบของคุณ:** {item['user_ans']}")
+            st.write(f"- **คำตอบที่ถูกต้อง:** :green[{item['correct_ans']}]")
+            st.write("---")
+    else:
+        st.balloons()
+        st.success("🎉 ยินดีด้วย! คุณตอบถูกต้องทุกข้อ")
